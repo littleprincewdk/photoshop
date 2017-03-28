@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" charset="utf-8" content="width=device-width,
+        initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=1.0">
+    <title>PhotoShop</title>
+    <link type="text/css" rel="stylesheet" href="photoshop.css"/>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<header id="header">
+    <span class="logo"></span>
+    <nav id="menu">
+        <ul class="menu-list">
+            <li class="menu-list-item">
+                文件(F)
+                <ul class="submenu-list">
+                    <li class="submenu-list-item">
+                        <span class="submenu-list-item-text">新建(N)</span>
+                        <span class="submenu-list-item-shortcut">Ctrl+N</span>
+                    </li>
+                    <li class="submenu-list-item">
+                        <span class="submenu-list-item-text">打开(O)</span>
+                        <span class="submenu-list-item-shortcut">Ctrl+O</span>
+                    </li>
+                    <hr/>
+                    <li class="submenu-list-item">
+                        <span class="submenu-list-item-text">退出(X)</span>
+                        <span class="submenu-list-item-shortcut">Ctrl+Q</span></li>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list-item">编辑(E)</li>
+            <li class="menu-list-item">图像(I)</li>
+            <li class="menu-list-item">图层(L)</li>
+            <li class="menu-list-item">文字(Y)</li>
+            <li class="menu-list-item">选择(S)</li>
+            <li class="menu-list-item">
+                滤镜(T)
+                <ul class="submenu-list menu-filter">
+                    <li class="submenu-list-item" data-effect="opacity">
+                        <span class="submenu-list-item-text">opacity</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="grey">
+                        <span class="submenu-list-item-text">grey</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="blackWhite">
+                        <span class="submenu-list-item-text">blackWhite</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="reverse">
+                        <span class="submenu-list-item-text">reverse</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="blur">
+                        <span class="submenu-list-item-text">blur</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="mirror">
+                        <span class="submenu-list-item-text">mirror</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="mosaic">
+                        <span class="submenu-list-item-text">mosaic</span>
+                    </li>
+                    <li class="submenu-list-item" data-effect="bright">
+                        <span class="submenu-list-item-text">bright</span>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list-item">3D(D)</li>
+            <li class="menu-list-item">视图(V)</li>
+            <li class="menu-list-item">窗口(W)</li>
+            <li class="menu-list-item">帮助(H)</li>
+        </ul>
+    </nav>
+</header>
+<main id="main">
+    <div id="controller">
+        <span class="controller-tool-icon"></span>
+        <ul class="controller-slider">
+            <li><label>透明度&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range"  id="opacity-opacity" /></li>
+            <li><label>灰&nbsp;&nbsp;度&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range"  id="grey-grey" /></li>
+            <li><label>阈&nbsp;&nbsp;值&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range"  id="blackWhite-threshold" /></li>
+            <li><label>距&nbsp;&nbsp;离&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range"  id="blur-distance" /></li>
+            <li><label>大&nbsp;&nbsp;小&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="mosaic-size" /></li>
+            <li><label>距&nbsp;&nbsp;离&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="mosaic-distance" /></li>
+            <li><label>坐标x&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="mosaic-x" /></li>
+            <li><label>坐标y&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="mosaic-y" /></li>
+            <li><label>亮&nbsp;&nbsp;度&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="bright-brightness"/></li>
+            <li><label>饱和度&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="saturation-saturation"/></li>
+            <li><label>角&nbsp;&nbsp;度&nbsp;&nbsp;:&nbsp;&nbsp;</label><input type="range" id="rotate-angle"/></li>
+        </ul>
+    </div>
+    <div id="tool">
+        <div class="extend"></div>
+        <ul class="tool-list">
+            <li class="tool-list-item tool-move  selected"></li>
+            <li class="tool-list-item">
+                <ul class="subtool-list tool-cut">
+                    <li class="subtool-list-item selected" data-cut="rect">
+                        <span class="subtool-list-item-text">矩形选框工具</span>
+                    </li>
+                    <li class="subtool-list-item" data-cut="circle">
+                        <span class="subtool-list-item-text">圆形选框工具</span>
+                    </li>
+                    <li class="subtool-list-item" data-cut="ellipse">
+                        <span class="subtool-list-item-text">椭圆选框工具</span>
+                    </li>
+                    <li class="subtool-list-item" data-cut="polygon">
+                        <span class="subtool-list-item-text">多边形选框工具</span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <div id="workspace">
+        <canvas id="middle-canvas" style="display: none;" ></canvas>
+        <canvas id="destination-canvas" ></canvas>
+    </div>
+    <div id="footer">
+
+    </div>
+</main>
+<div class="shade">
+    <div class="sk-spinner sk-spinner-three-bounce">
+        <div class="sk-bounce1"></div>
+        <div class="sk-bounce2"></div>
+        <div class="sk-bounce3"></div>
+    </div>
+</div>
+<script src="js/sea.js"></script>
+<script>
+    seajs.config({
+        base: "../photoshops/js/",
+        alias: {
+            "jquery": "jquery.js",
+            "mouseWheel":"jquery.mousewheel.js"
+        }
+    });
+    seajs.use("../photoshops/js/photoshop.js");
+    seajs.use("../photoshops/js/filter.js");
+    seajs.use("../photoshops/js/cut.js");
+    seajs.use("../photoshops/js/event.js");
+</script>
+</body>
+</html>
