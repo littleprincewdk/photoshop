@@ -42,7 +42,7 @@ a{
     float:left;
     width:30px;
     height:30px;
-    background: url(photoshop.png) no-repeat center center;
+    background: url(../images/photoshop.png) no-repeat center center;
     background-size: 70% 60%;
 }
 /*menu*/
@@ -169,7 +169,7 @@ a{
     width:32px;
     height:24px;
     margin:3px;
-    background:url(tool.png) no-repeat center center;
+    background:url(../images/tool.png) no-repeat center center;
     background-size: 100% 100%;
 }
 #tool .tool-list .tool-list-item:after{
@@ -257,7 +257,7 @@ a{
     width:40px;
     height:35px;
     padding:5px;
-    background: url(tool.png) no-repeat center center;
+    background: url(../images/tool.png) no-repeat center center;
     background-size: 100%;
     background-origin: content-box;
 }
@@ -308,7 +308,7 @@ a{
     left:calc(50% - 35px);
     top:calc(40% - 10px);
     width:70px;
-    text-align:center
+    text-align:center;
 }
 .sk-spinner-three-bounce div{
     width:18px;

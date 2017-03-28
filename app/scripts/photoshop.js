@@ -67,7 +67,7 @@ define(function(require, exports, module){
     };
     var image=new Image();
 
-    image.src="jana.jpg";
+    image.src="images/jana.jpg";
     $.extend(image,{
         maxWidth:image.width*defaults.maxScale,
         maxHeight:image.height*defaults.maxScale,
@@ -91,7 +91,6 @@ define(function(require, exports, module){
         contextM.drawImage(image,0,0,image.width,image.height);
 
         contextM.restore();
-
         DestinationCanvas.drawImage($.filter.effect=="rotate");
     };
     DestinationCanvas.extend({

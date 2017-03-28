@@ -4,7 +4,7 @@
  */
 
 define(function(require,exports,module){
-    var vars=require("photoshop.js"),
+    var vars=require("./photoshop.js"),
         defaults=vars.defaults,
         DestinationCanvas=vars.DestinationCanvas,
         image=vars.image;

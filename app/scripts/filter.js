@@ -4,7 +4,7 @@
  */
 define(function(require, exports, module){
     var $=require("jquery");
-    var vars=require("photoshop.js"),
+    var vars=require("./photoshop.js"),
         defaults=vars.defaults,
         DestinationCanvas=vars.DestinationCanvas,
         image=vars.image;
@@ -17,9 +17,9 @@ define(function(require, exports, module){
     $(".menu-filter>li").click(function(){
         $(".menu-filter").hide();
 
-        //$(".shade").css("display","none");
-        //filter($(this).attr("data-effect"));
-        //$(".shade").hide();
+        var $Shade=$(".shade").show();
+        filter($(this).attr("data-effect"));
+        $Shade.hide();
     });
     //滤镜，实现各种效果
     function filter(effect){

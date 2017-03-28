@@ -4,7 +4,7 @@
  */
 define(function(require){
     var $=require("jquery");
-    var vars=require("photoshop.js"),
+    var vars=require("./photoshop.js"),
         defaults=vars.defaults,
         DestinationCanvas=vars.DestinationCanvas,
         image=vars.image;
@@ -22,7 +22,7 @@ define(function(require){
 
         DestinationCanvas.drawImage($.filter.effect=="rotate");
     };
-    var transform=require("transform.js");
+    var transform=require("./transform.js");
     transform();
     $(".menu-list-item").click(function(){
         $(this).find(".submenu-list").show()

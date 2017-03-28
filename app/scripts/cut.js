@@ -4,7 +4,7 @@
  */
 define(function(require,exports,module){
     var $=require("jquery");
-    var vars=require("photoshop.js"),
+    var vars=require("./photoshop.js"),
         defaults=vars.defaults,
         DestinationCanvas=vars.DestinationCanvas;
     var canvasD=document.getElementById("destination-canvas"),
