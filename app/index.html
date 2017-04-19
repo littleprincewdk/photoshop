@@ -16,6 +16,7 @@
 
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/photoshop.css">
+    <link rel="stylesheet" type="text/css" href="../bower_components/Xpop/dist/xpop.css"/>
     <!-- endbuild -->
     
   </head>
@@ -32,13 +33,14 @@
                           <span class="submenu-list-item-shortcut">Ctrl+N</span>
                       </li>
                       <li class="submenu-list-item">
-                          <span class="submenu-list-item-text">打开(O)</span>
+                          <span class="submenu-list-item-text" id="openFile">打开(O)</span>
+                          <input type="file" id="image" accept="image/png,image/jpeg" style="display:none;"/>
                           <span class="submenu-list-item-shortcut">Ctrl+O</span>
                       </li>
                       <hr/>
                       <li class="submenu-list-item">
                           <span class="submenu-list-item-text">退出(X)</span>
-                          <span class="submenu-list-item-shortcut">Ctrl+Q</span></li>
+                          <span class="submenu-list-item-shortcut">Ctrl+Q</span><
                       </li>
                   </ul>
               </li>
@@ -82,6 +84,7 @@
               <li class="menu-list-item">帮助(H)</li>
           </ul>
       </nav>
+      <a id="done" class="menu-list-item" style="float:right;margin-right:20px;">完成</a>
   </header>
   <main id="main">
       <div id="controller">
@@ -103,7 +106,7 @@
       <div id="tool">
           <div class="extend"></div>
           <ul class="tool-list">
-              <li class="tool-list-item tool-move  selected"></li>
+              <li class="tool-list-item tool-move"></li>
               <li class="tool-list-item">
                   <ul class="subtool-list tool-cut">
                       <li class="subtool-list-item selected" data-cut="rect">
@@ -123,7 +126,23 @@
           </ul>
       </div>
       <div id="workspace">
-          <canvas id="middle-canvas" style="display: none;" ></canvas>
+          <div class="xpop xpop-modal">
+              <div class="xpop-content">
+                  <div class="xpop-header">
+                      <h4 class="xpop-title">XPop Title</h4>
+                      <button class="close" data-tool="close"></button>
+                      <button class="maximize" data-tool="maximize"></button>
+                      <button class="minimize" data-tool="minimize"></button>
+                  </div>
+                  <div class="xpop-body">
+                      <canvas id="middle-canvas" style="display: none;" ></canvas>
+                  </div>
+                  <div class="xpop-footer">
+                      <button class="xpop-btn btn-default" data-tool="close">close</button>
+                      <button class="xpop-btn btn-primary" data-tool="ok">ok</button>
+                  </div>
+              </div>
+          </div>
           <canvas id="destination-canvas"></canvas>
       </div>
       <div id="footer">
@@ -142,6 +161,7 @@
     <!-- bower:js -->
     <!--<script src="../bower_components/jquery/dist/jquery.js"></script>-->
     <script src="../bower_components/requirejs/require.js"></script>
+    <!--<script src="../bower_components/Xpop/dist/xpop.js"></script>-->
     <!-- endbower -->
     <!-- endbuild -->
     
@@ -149,14 +169,26 @@
 
     <!-- endbuild -->
     <script>
-        requirejs.config({
-            base: "",
-            paths: {
-                "jquery": "../bower_components/jquery/dist/jquery",
-                "mouseWheel":"../bower_components/jquery-mousewheel/jquery.mousewheel",
-            }
-        });
-        requirejs(["./scripts/photoshop.js","./scripts/filter.js","./scripts/cut.js","./scripts/event.js"]);
+        var error=false;
+        if(!document.createElement('canvas').getContext){
+            alert('不支持canvas');
+            error=true;
+        }
+        if(FileReader === 'undefined'){
+            alert('不支持FileReader');
+            error=true;
+        }
+        if(!error){
+            requirejs.config({
+                base: "",
+                paths: {
+                    "jquery": "../bower_components/jquery/dist/jquery",
+                    "mouseWheel":"../bower_components/jquery-mousewheel/jquery.mousewheel",
+                    'xpop':"../bower_components/Xpop/dist/xpop"
+                }
+            });
+            requirejs(["./scripts/photoshop.js","./scripts/filter.js","./scripts/cut.js","./scripts/event.js"]);
+        }
     </script>
   </body>
 </html>

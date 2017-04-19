@@ -2,11 +2,18 @@
  * Created by wudengke on 2017/2/1.
  */
 define(function(require, exports, module){
-    var $=require("jquery");
-    require("mouseWheel");
-
+    var $=require('jquery');
+    require('mouseWheel');
+    require('xpop');
+    $('#done').click(function(){
+        $('.xpop').XPop({
+            dragMode:true,
+            backdropMode:true,
+        });
+        $('#middle-canvas').show();
+    });
     var defaults={
-        canvasBackgroundColor:"#282828",
+        canvasBackgroundColor:'#282828',
         maxScale:5.0,
         minScale:0.1,
         //滤镜
@@ -66,33 +73,45 @@ define(function(require, exports, module){
         curImageHeight:0
     };
     var image=new Image();
+    var $Image=$('#image').on('change',function(){
+        var reader= new FileReader();
+        reader.onload=function(e){
+            image.src=e.target.result;
+            $.extend(image,{
+                maxWidth:image.width*defaults.maxScale,
+                maxHeight:image.height*defaults.maxScale,
+                minWidth:image.width*defaults.minScale,
+                minHeight:image.height*defaults.minScale
+            });
 
-    image.src="images/jana.jpg";
-    $.extend(image,{
-        maxWidth:image.width*defaults.maxScale,
-        maxHeight:image.height*defaults.maxScale,
-        minWidth:image.width*defaults.minScale,
-        minHeight:image.height*defaults.minScale
+            canvasM.width=image.width;
+            canvasM.height=image.height;
+
+            defaults.mosaic.x.max=image.width;
+            defaults.mosaic.y.max=image.height;
+
+            DestinationCanvas.status.curImageWidth=image.width;
+            DestinationCanvas.status.curImageHeight=image.height;
+
+            image.onload=function(){
+                contextM.save();
+
+                contextM.clearRect(0,0,canvasM.width,canvasM.height);
+                contextM.drawImage(image,0,0,image.width,image.height);
+
+                contextM.restore();
+                DestinationCanvas.drawImage($.filter.effect=="rotate");
+            };
+        };
+        if(this.files.length!==0){
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+    $('#openFile').click(function(){
+        $(this).parents('.submenu-list').hide();
+        $Image.click();
     });
 
-    canvasM.width=image.width;
-    canvasM.height=image.height;
-
-    defaults.mosaic.x.max=image.width;
-    defaults.mosaic.y.max=image.height;
-
-    DestinationCanvas.status.curImageWidth=image.width;
-    DestinationCanvas.status.curImageHeight=image.height;
-
-    image.onload=function(){
-        contextM.save();
-
-        contextM.clearRect(0,0,defaults.canvasWidth,defaults.canvasHeight);
-        contextM.drawImage(image,0,0,image.width,image.height);
-
-        contextM.restore();
-        DestinationCanvas.drawImage($.filter.effect=="rotate");
-    };
     DestinationCanvas.extend({
         getCoordinate:function(x,y){
             var canvasCoordinate=DestinationCanvas.offset(),

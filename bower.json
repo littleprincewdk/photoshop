@@ -5,7 +5,8 @@
     "jquery": "~2.1.1",
     "seajs": "seajs/seajs#^3.0.0",
     "requirejs": "^2.3.3",
-    "jquery-mousewheel": "jquery/jquery-mousewheel#^3.1.13"
+    "jquery-mousewheel": "jquery/jquery-mousewheel#^3.1.13",
+    "Xpop": "littleprincewdk/pop"
   },
   "devDependencies": {
     "chai": "^3.5.0",
